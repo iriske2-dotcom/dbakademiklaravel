@@ -36,4 +36,33 @@ class MahasiswaController extends Controller
         $mhs->delete();
         return redirect('/tampil')->with('success', 'Berhasil Menghapus Data');
     }
+
+    // Fungsi untuk mengambil data dan menampilkan ke form edit
+public function edit($nim)
+{
+    // Mencari data berdasarkan NIM [cite: 2, 465]
+    $mhs = MahasiswaModel::findOrFail($nim); 
+    return view('mahasiswa.edit', compact('mhs'));
+}
+
+// Fungsi untuk menyimpan perubahan data ke database
+public function update(Request $request, $nim)
+{
+    // Validasi data input [cite: 1, 93-95]
+    $validasiData = $request->validate([
+        'nama' => 'required|min:3', 
+        'jurusan' => 'required' 
+    ], [
+        'nama.required' => 'Nama wajib diisi.', 
+        'nama.min' => 'Nama minimal 3 karakter.', 
+        'jurusan.required' => 'Jurusan wajib diisi.'
+    ]);
+
+    // Update data di database berdasarkan NIM [cite: 1, 71]
+    $mhs = MahasiswaModel::findOrFail($nim);
+    $mhs->update($validasiData);
+
+    // Redirect kembali ke halaman tampil dengan pesan sukses
+    return redirect('/tampil')->with('success', 'Berhasil Mengubah Data');
+}
 }
