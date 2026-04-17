@@ -16,7 +16,7 @@
                     <div class="mb-3">
                         <label class="form-label fw-semibold">NIM</label>
                         <input type="text" class="form-control bg-light" value="{{ $mhs->nim }}" readonly>
-                        <small class="text-danger">* NIM tidak dapat diubah karena merupakan Primary Key.</small>
+                        <small class="text-danger">* NIM tidak dapat diubah.</small>
                     </div>
 
                     <div class="mb-3">
