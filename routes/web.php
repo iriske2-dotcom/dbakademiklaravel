@@ -1,16 +1,25 @@
 <?php
 
-use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-// Pastikan tidak ada spasi di nama class "MahasiswaController"
-Route::get('/', [MahasiswaController::class, 'index']); 
-Route::get('/create', [MahasiswaController::class, 'create']);
-Route::post('/store', [MahasiswaController::class, 'store']);
-Route::get('/tampil', [MahasiswaController::class, 'tampil']);
-Route::delete('/delete/{nim}', [MahasiswaController::class, 'destroy']);
-// Route untuk menampilkan form edit
-Route::get('/edit/{nim}', [MahasiswaController::class, 'edit']);
+Route::get('/', function () {
+    return view('welcome');
+});
 
-// Route untuk memproses perubahan data (menggunakan method PUT)
-Route::put('/update/{nim}', [MahasiswaController::class, 'update']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    // Letakkan semua rute mahasiswamu di sini agar aman
+    Route::get('/', [MahasiswaController::class, 'index']);
+    Route::get('/create', [MahasiswaController::class, 'create']);
+    Route::post('/store', [MahasiswaController::class, 'store']);
+    Route::get('/tampil', [MahasiswaController::class, 'tampil']);
+    Route::get('/edit/{nim}', [MahasiswaController::class, 'edit']);
+    Route::put('/update/{nim}', [MahasiswaController::class, 'update']);
+    Route::delete('/delete/{nim}', [MahasiswaController::class, 'destroy']);
+});
+
+require __DIR__.'/auth.php';
