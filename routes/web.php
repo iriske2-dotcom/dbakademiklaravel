@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 // 1. Halaman Awal (Bisa kamu ganti ke '/' atau biarkan 'welcome')
 Route::get('/', function () {
-    return view('/tampil');
+    return redirect('/tampil');
 });
 
 // 2. Rute Dashboard bawaan Breeze
