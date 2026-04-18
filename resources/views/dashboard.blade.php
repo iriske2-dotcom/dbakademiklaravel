@@ -1,17 +1,16 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
-                </div>
-            </div>
+@extends('layouts.app')
+@section('title', 'Dashboard')
+@section('content')
+<div class="container text-center py-5">
+    <div class="card shadow border-0 p-5" style="border-radius: 20px;">
+        <h1 class="display-4 fw-bold text-primary">Selamat Datang!</h1>
+        <p class="lead text-muted">Halo, <strong>{{ Auth::user()->name }}</strong>. Kamu telah masuk ke Sistem Akademik RIS.</p>
+        <hr class="my-4" style="width: 100px; margin: auto; border-top: 3px solid #007bff;">
+        <div class="mt-4">
+            <a href="/tampil" class="btn btn-primary btn-lg shadow-sm px-5 fw-bold">
+                <i class="fas fa-list-ul me-2"></i>Lihat Data Mahasiswa
+            </a>
         </div>
     </div>
-</x-app-layout>
+</div>
+@endsection
