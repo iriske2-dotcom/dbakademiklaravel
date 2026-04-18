@@ -8,7 +8,9 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}" href="/dashboard"><i class="fas fa-home me-1"></i> Dashboard</a>
+          <a class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}" href="/dashboard">
+            <i class="fas fa-home me-1"></i> Dashboard
+          </a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
@@ -25,32 +27,27 @@
         </li>
       </ul>
 
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto align-items-center">
         @auth
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle fw-bold text-white border border-light rounded-pill px-3" href="#" role="button" data-bs-toggle="dropdown">
+          {{-- Menampilkan Nama User sebagai teks --}}
+          <li class="nav-item me-3">
+            <span class="text-white fw-semibold small">
               <i class="fas fa-user-circle me-1"></i> {{ Auth::user()->name }}
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end border-0 shadow mt-2">
-              <li>
-                <div class="dropdown-header text-dark small text-uppercase">Manajemen Akun</div>
-              </li>
-              <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="fas fa-cog me-2"></i>Pengaturan Profil</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li>
-                {{-- Form Logout Wajib POST --}}
-                <form method="POST" action="{{ route('logout') }}">
-                  @csrf
-                  <button type="submit" class="dropdown-item text-danger fw-bold">
-                    <i class="fas fa-sign-out-alt me-2"></i>Logout
-                  </button>
-                </form>
-              </li>
-            </ul>
+            </span>
+          </li>
+
+          {{-- Tombol Logout --}}
+          <li class="nav-item">
+            <form method="POST" action="{{ route('logout') }}">
+              @csrf
+              <button type="submit" class="btn btn-danger btn-sm fw-bold px-3 shadow-sm rounded-pill">
+                <i class="fas fa-sign-out-alt me-1"></i> LOGOUT
+              </button>
+            </form>
           </li>
         @else
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('login') }}">Login</a>
+            <a class="nav-link fw-bold" href="{{ route('login') }}">LOGIN</a>
           </li>
         @endauth
       </ul>
